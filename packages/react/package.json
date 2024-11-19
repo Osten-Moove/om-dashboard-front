@@ -1,0 +1,44 @@
+{
+  "name": "@quick-dash/react",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build-react": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
+    "storybook": "storybook dev -p 6006",
+    "deploy:storybook": "storybook-to-ghpages",
+    "build-storybook": "storybook build",
+    "build": "npm run build-react && npm run build-storybook"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@chromatic-com/storybook": "1.9.0",
+    "@quick-dash/ts-config": "*",
+    "@quick-dash/tokens": "*",
+    "@storybook/addon-essentials": "8.3.6",
+    "@storybook/addon-interactions": "8.3.6",
+    "@storybook/addon-links": "8.3.6",
+    "@storybook/addon-onboarding": "8.3.6",
+    "@storybook/blocks": "8.3.6",
+    "@storybook/react": "8.3.6",
+    "@storybook/react-vite": "8.3.6",
+    "@storybook/storybook-deployer": "2.8.16",
+    "@storybook/test": "8.3.6",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "react": "18.3.1",
+    "storybook": "8.3.6",
+    "tsup": "8.3.0",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "polished": "4.3.1",
+    "recharts": "2.13.0",
+    "styled-components": "6.1.13"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@quick-dash/quick-dash-ui",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev --parallel",
+    "build": "turbo build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish"
+  },
+  "packageManager": "npm@10.8.2",
+  "devDependencies": {
+    "@changesets/cli": "2.27.9",
+    "turbo": "2.2.3"
+  }
+}

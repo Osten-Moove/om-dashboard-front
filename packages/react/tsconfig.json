@@ -1,0 +1,4 @@
+{
+  "extends": "@osten-moove-quick-dash/ts-config/react.json",
+  "include": ["src"]
+}
