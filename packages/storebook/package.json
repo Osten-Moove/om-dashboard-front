@@ -1,16 +1,11 @@
 {
-  "name": "@quick-dash/react",
+  "name": "@om-dashboard-front-end/store-book",
   "version": "1.0.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "private": true,
   "scripts": {
-    "build-react": "tsup src/index.tsx --format esm,cjs --dts --external react",
-    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
-    "storybook": "storybook dev -p 6006",
-    "deploy:storybook": "storybook-to-ghpages",
-    "build-storybook": "storybook build",
-    "build": "npm run build-react && npm run build-storybook"
+    "dev": "storybook dev -p 6006",
+    "deploy": "storybook-to-ghpages",
+    "build": "storybook build"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +13,8 @@
   "description": "",
   "devDependencies": {
     "@chromatic-com/storybook": "1.9.0",
-    "@quick-dash/ts-config": "*",
-    "@quick-dash/tokens": "*",
+    "om-dashboard-ts-config": "*",
+    "@om-dashboard/front-end": "*",
     "@storybook/addon-essentials": "8.3.6",
     "@storybook/addon-interactions": "8.3.6",
     "@storybook/addon-links": "8.3.6",

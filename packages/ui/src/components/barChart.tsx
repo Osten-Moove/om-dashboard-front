@@ -1,16 +1,6 @@
-import {
-  BarChart,
-  Bar,
-  ResponsiveContainer,
-  Rectangle,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-import { colors, fonts } from "@osten-moove/tokens";
+import { colors, fonts } from '../styles';
 
 type dataRow = {
   label: string;
@@ -23,15 +13,11 @@ interface BarChartDashProps {
   maxHeight?: number;
 }
 
-export function BarChartDash({
-  dataBody,
-  maxWidth = 800,
-  maxHeight = 600,
-}: BarChartDashProps) {
+export function BarChartDash({ dataBody, maxWidth = 800, maxHeight = 600 }: BarChartDashProps) {
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
 
-  const referenceFields = objectFields.filter((item) => item !== "label");
+  const referenceFields = objectFields.filter((item) => item !== 'label');
 
   const COLORS = Object.values(colors);
 
@@ -56,15 +42,7 @@ export function BarChartDash({
         <Legend />
 
         {referenceFields.map((item, index) => {
-          return (
-            <Bar
-              key={index}
-              dataKey={item}
-              fill={COLORS[index]}
-              radius={6}
-              activeBar={<Rectangle fill="gold" stroke="purple" />}
-            />
-          );
+          return <Bar key={index} dataKey={item} fill={COLORS[index]} radius={6} activeBar={<Rectangle fill="gold" stroke="purple" />} />;
         })}
       </BarChart>
     </ResponsiveContainer>

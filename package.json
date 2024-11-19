@@ -1,8 +1,9 @@
 {
   "private": true,
-  "name": "@quick-dash/quick-dash-ui",
+  "name": "om-dashboard-front-end",
   "workspaces": [
-    "packages/*"
+    "packages/ui",
+    "packages/ts-config"
   ],
   "scripts": {
     "dev": "turbo dev --parallel",
@@ -11,7 +12,7 @@
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "yarn@1.22.0",
   "devDependencies": {
     "@changesets/cli": "2.27.9",
     "turbo": "2.2.3"

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PieChartDash } from "../components/pieChart";
+import { PieChartDash } from "@om-dashboard/front-end";
 
 export default {
   title: "Grafics/Pie Chart Dash",

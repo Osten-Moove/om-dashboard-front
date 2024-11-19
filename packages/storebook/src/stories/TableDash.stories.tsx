@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TableDash } from "../components/tableDash";
+import { TableDash } from "@om-dashboard/front-end";
 
 export default {
   title: "Grafics/Table Dash",

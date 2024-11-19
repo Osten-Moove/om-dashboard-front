@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { fonts } from "@osten-moove/tokens";
+import { fonts } from '../styles';
 
 type TableContainerTheme = {
-  $variant: "light" | "dark";
+  $variant: 'light' | 'dark';
 };
 
 export const TableContainer = styled.table<TableContainerTheme>`
@@ -14,7 +14,7 @@ export const TableContainer = styled.table<TableContainerTheme>`
 
   table-layout: fixed;
   border: 1px solid #737373;
-  background: ${(props) => (props.$variant === "light" ? "#fff" : "#262626")};
+  background: ${(props) => (props.$variant === 'light' ? '#fff' : '#262626')};
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 10px;
@@ -23,11 +23,11 @@ export const TableContainer = styled.table<TableContainerTheme>`
   overflow: hidden;
 
   th {
-    color: ${(props) => (props.$variant === "light" ? "#000" : "#ffffff")};
+    color: ${(props) => (props.$variant === 'light' ? '#000' : '#ffffff')};
   }
 
   td {
-    color: ${(props) => (props.$variant === "light" ? "#000" : "#c8c8c8")};
+    color: ${(props) => (props.$variant === 'light' ? '#000' : '#c8c8c8')};
   }
 
   th,
@@ -54,18 +54,15 @@ export const TableContainer = styled.table<TableContainerTheme>`
   }
 
   th:last-child {
-    border-right-color: ${(props) =>
-      props.$variant === "light" ? "#eaeafb" : "#0d0d0d"};
+    border-right-color: ${(props) => (props.$variant === 'light' ? '#eaeafb' : '#0d0d0d')};
   }
 
   td:last-child {
-    border-right-color: ${(props) =>
-      props.$variant === "light" ? "#eaeafb" : "#0d0d0d"};
+    border-right-color: ${(props) => (props.$variant === 'light' ? '#eaeafb' : '#0d0d0d')};
   }
 
   tr:nth-child(even) {
-    background-color: ${(props) =>
-      props.$variant === "light" ? "#E6E6FA" : "#1e1e1e"};
+    background-color: ${(props) => (props.$variant === 'light' ? '#E6E6FA' : '#1e1e1e')};
   }
 
   @media (max-width: 600px) {

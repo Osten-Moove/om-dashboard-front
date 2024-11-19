@@ -1,0 +1,30 @@
+{
+  "name": "@om-dashboard/front-end",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "private": false,
+  "scripts": {
+    "build-react": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
+    "build": "npm run build-react"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "om-dashboard-ts-config": "*",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "react": "18.3.1",
+    "tsup": "8.3.0",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "polished": "4.3.1",
+    "recharts": "2.13.0",
+    "styled-components": "6.1.13"
+  }
+}

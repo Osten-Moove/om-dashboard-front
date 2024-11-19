@@ -1,15 +1,7 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-import { colors, fonts } from "@osten-moove/tokens";
+import { colors, fonts } from '../styles';
+import React from 'react';
 
 type dataRow = {
   label: string;
@@ -22,15 +14,11 @@ interface LineChartDashProps {
   maxHeight?: number;
 }
 
-export function LineChartDash({
-  dataBody,
-  maxWidth = 800,
-  maxHeight = 800,
-}: LineChartDashProps) {
+export function LineChartDash({ dataBody, maxWidth = 800, maxHeight = 800 }: LineChartDashProps) {
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
 
-  const referenceFields = objectFields.filter((item) => item !== "label");
+  const referenceFields = objectFields.filter((item) => item !== 'label');
 
   const COLORS = Object.values(colors);
 
@@ -41,7 +29,7 @@ export function LineChartDash({
       maxHeight={maxHeight}
       style={{
         maxWidth: `${maxWidth}px`,
-        padding: "1rem",
+        padding: '1rem',
         fontFamily: fonts.openSans,
         fontWeight: 600,
       }}
@@ -66,16 +54,7 @@ export function LineChartDash({
         <Legend />
 
         {referenceFields.map((item, index) => {
-          return (
-            <Line
-              key={index}
-              type="monotone"
-              dataKey={item}
-              stroke={COLORS[index]}
-              strokeWidth={3}
-              activeDot={{ r: 8 }}
-            />
-          );
+          return <Line key={index} type="monotone" dataKey={item} stroke={COLORS[index]} strokeWidth={3} activeDot={{ r: 8 }} />;
         })}
       </LineChart>
     </ResponsiveContainer>

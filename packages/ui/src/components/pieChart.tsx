@@ -1,6 +1,6 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-import { colors, fonts } from "@osten-moove/tokens";
+import { colors, fonts } from '../styles';
 
 interface CustomizedLabelProps {
   cx: number;
@@ -37,15 +37,7 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={({
-            cx,
-            cy,
-            midAngle,
-            innerRadius,
-            outerRadius,
-            percent,
-            index,
-          }: CustomizedLabelProps) => {
+          label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: CustomizedLabelProps) => {
             const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
             const x = cx + radius * Math.cos(-midAngle * RADIAN);
             const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -60,7 +52,7 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
                   fontFamily: fonts.openSans,
                   fontWeight: 700,
                 }}
-                textAnchor={x > cx ? "start" : "end"}
+                textAnchor={x > cx ? 'start' : 'end'}
                 dominantBaseline="central"
               >
                 {`${(percent * 100).toFixed(0)}%`}
