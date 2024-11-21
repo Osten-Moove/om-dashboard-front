@@ -20,6 +20,11 @@ export default {
         min: 200,
       },
     },
+    colorCollection: {
+      control: {
+        type: "object",
+      },
+    },
   },
   render: (args) => {
     const data = [
@@ -61,6 +66,7 @@ export default {
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
+          colorCollection={args.colorCollection}
         />
       </div>
     );

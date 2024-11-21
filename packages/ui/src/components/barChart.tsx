@@ -18,23 +18,30 @@ type dataRow = {
   [key: string]: string | number;
 };
 
+type ColorCollection = Record<string, string>;
+
 interface BarChartDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
+  colorCollection?: ColorCollection | null;
 }
 
 export function BarChartDash({
   dataBody,
   maxWidth = 800,
   maxHeight = 600,
+  colorCollection = null,
 }: BarChartDashProps) {
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
 
   const referenceFields = objectFields.filter((item) => item !== "label");
 
-  const COLORS = Object.values(Colors);
+  const COLORS =
+    colorCollection === null
+      ? Object.values(Colors)
+      : Object.values(colorCollection);
 
   return (
     <ResponsiveContainer
