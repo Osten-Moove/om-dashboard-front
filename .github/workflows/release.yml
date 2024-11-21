@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  release:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,13 +20,9 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
 
       - run: npm install
+      - run: npm run build
 
-      - name: Publish to NPM
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: npm run release
+      - run: npm publish --access public
+      - run: npm publish --access public -w @om-dashboard/front-end
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          TURBO_TEAM: ostenmoove
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
