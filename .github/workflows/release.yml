@@ -19,13 +19,12 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
-      - run: npm ci
+      - run: npm install
 
       - name: Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
-          version: npm run version-packages
           publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
