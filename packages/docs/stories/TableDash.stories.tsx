@@ -17,6 +17,7 @@ export default {
       control: {
         type: "select",
       },
+      options: ["light", "dark"],
     },
   },
   render: (args) => {
