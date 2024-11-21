@@ -1,6 +1,6 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-import { colors, fonts } from '../styles';
+import { colors, fonts } from '../index';
 
 interface CustomizedLabelProps {
   cx: number;
