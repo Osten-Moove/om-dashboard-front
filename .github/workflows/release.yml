@@ -15,9 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
+          node-version: 20
 
       - run: npm ci
 
@@ -25,9 +23,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          version: version-packages
           publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          TURBO_TEAM: OstenMoove
