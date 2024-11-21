@@ -1,3 +1,4 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { BarChartDash } from "@om-dashboard/front-end";
@@ -17,6 +18,11 @@ export default {
       control: {
         type: "number",
         min: 200,
+      },
+    },
+    colorCollection: {
+      control: {
+        type: "object",
       },
     },
   },
@@ -60,6 +66,7 @@ export default {
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
+          colorCollection={args.colorCollection}
         />
       </div>
     );

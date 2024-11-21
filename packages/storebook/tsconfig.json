@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  },
-  "extends": "om-dashboard-ts-config/react.json",
-  "include": ["../ui/src"]
-}

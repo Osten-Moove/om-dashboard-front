@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/blocks';
 
 import { FontsGrid } from './FontsGrid';
-import { fonts } from '@om-dashboard/front-end';
+import { Fonts } from '@om-dashboard/front-end/dist';
 
 <Meta title="Tokens/Fonts" />
 
@@ -10,5 +10,5 @@ import { fonts } from '@om-dashboard/front-end';
 Essas são as fonts utilizadas no QuickDash.
 
 <div className="sb-container">
-  <FontsGrid tokens={fonts} />
+  <FontsGrid tokens={Fonts} />
 </div>

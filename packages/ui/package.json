@@ -2,13 +2,11 @@
   "name": "@om-dashboard/front-end",
   "version": "1.0.0",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "private": false,
   "scripts": {
-    "build-react": "tsup src/index.tsx --format esm,cjs --dts --external react",
-    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
-    "build": "npm run build-react"
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch"
   },
   "keywords": [],
   "author": "",
