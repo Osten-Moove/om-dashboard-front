@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Node.js Publish
 
 on:
   push:
@@ -16,13 +16,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
+          registry-url: https://registry.npmjs.org/
 
       - run: npm install
       - run: npm run build
 
-      - run: npm publish --access public
       - run: npm publish --access public -w @om-dashboard/front-end
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
