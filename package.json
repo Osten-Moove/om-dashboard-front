@@ -2,8 +2,7 @@
   "private": true,
   "name": "om-dashboard-front-end",
   "workspaces": [
-    "packages/ui",
-    "packages/ts-config"
+    "packages/*"
   ],
   "scripts": {
     "dev": "turbo dev --parallel",

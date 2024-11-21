@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { fonts } from "../index";
+import { Fonts } from "../styles/fonts";
 
 type TableContainerTheme = {
   $variant: "light" | "dark";
@@ -10,7 +10,7 @@ export const TableContainer = styled.table<TableContainerTheme>`
   width: 100%;
   min-width: 900px;
 
-  font-family: ${fonts.default};
+  font-family: ${Fonts.default};
 
   table-layout: fixed;
   border: 1px solid #737373;

@@ -1,10 +1,11 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BarChartDash } from "@om-dashboard/front-end";
+import { LineChartDash } from "@om-dashboard/front-end";
 
 export default {
-  title: "Grafics/Bar Chart Dash",
-  component: BarChartDash,
+  title: "Grafics/Line Chart Dash",
+  component: LineChartDash,
   tags: ["autodocs"],
   argTypes: {
     maxWidth: {
@@ -52,11 +53,23 @@ export default {
         Despezas: 4800,
         Lucro: 1250,
       },
+      {
+        label: "June",
+        Vendas: 2390,
+        Despezas: 3800,
+        Lucro: 2250,
+      },
+      {
+        label: "July",
+        Vendas: 3490,
+        Despezas: 4300,
+        Lucro: 3250,
+      },
     ];
 
     return (
-      <div style={{ width: "700px", height: "400px" }}>
-        <BarChartDash
+      <div style={{ width: "800px", height: "400px" }}>
+        <LineChartDash
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}

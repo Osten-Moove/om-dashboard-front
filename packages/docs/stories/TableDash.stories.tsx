@@ -1,4 +1,6 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { TableDash } from "@om-dashboard/front-end";
 
 export default {

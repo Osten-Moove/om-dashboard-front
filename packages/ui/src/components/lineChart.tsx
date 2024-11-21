@@ -9,8 +9,8 @@ import {
   YAxis,
 } from "recharts";
 
-import { colors, fonts } from "../index";
-import React from "react";
+import { Colors } from "../styles/colors";
+import { Fonts } from "../styles/fonts";
 
 type dataRow = {
   label: string;
@@ -33,7 +33,7 @@ export function LineChartDash({
 
   const referenceFields = objectFields.filter((item) => item !== "label");
 
-  const COLORS = Object.values(colors);
+  const COLORS = Object.values(Colors);
 
   return (
     <ResponsiveContainer
@@ -43,7 +43,7 @@ export function LineChartDash({
       style={{
         maxWidth: `${maxWidth}px`,
         padding: "1rem",
-        fontFamily: fonts.openSans,
+        fontFamily: Fonts.openSans,
         fontWeight: 600,
       }}
     >

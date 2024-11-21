@@ -1,6 +1,7 @@
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
-import { colors, fonts } from '../index';
+import { Colors } from "../styles/colors";
+import { Fonts } from "../styles/fonts";
 
 interface CustomizedLabelProps {
   cx: number;
@@ -26,7 +27,7 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
   const calcToDefineOuterRadius = Math.round((size / 700) * 200);
   const calcToDefineFontSizeInText = Math.round((size / 700) * 28);
 
-  const COLORS = Object.values(colors);
+  const COLORS = Object.values(Colors);
 
   const RADIAN = Math.PI / 180;
   return (
@@ -37,7 +38,15 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: CustomizedLabelProps) => {
+          label={({
+            cx,
+            cy,
+            midAngle,
+            innerRadius,
+            outerRadius,
+            percent,
+            index,
+          }: CustomizedLabelProps) => {
             const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
             const x = cx + radius * Math.cos(-midAngle * RADIAN);
             const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -49,10 +58,10 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
                 fill="white"
                 style={{
                   fontSize: `${calcToDefineFontSizeInText}px`,
-                  fontFamily: fonts.openSans,
+                  fontFamily: Fonts.openSans,
                   fontWeight: 700,
                 }}
-                textAnchor={x > cx ? 'start' : 'end'}
+                textAnchor={x > cx ? "start" : "end"}
                 dominantBaseline="central"
               >
                 {`${(percent * 100).toFixed(0)}%`}

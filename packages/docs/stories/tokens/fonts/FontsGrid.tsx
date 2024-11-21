@@ -1,3 +1,4 @@
+import React from "react";
 import "./Fonts-grid.css";
 
 interface FontsGridProps {
