@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "@om-dashboard/packages",
   "workspaces": [
     "packages/*"
   ],
