@@ -27,6 +27,12 @@ jobs:
       - name: Verify dist folder
         run: ls -la ./packages/ui/dist
 
+      - name: Verify src folder
+        run: ls -la ./packages/ui/src
+
+      - name: Verify turbo folder
+        run: ls -la ./packages/ui/.turbo
+
       - name: Pack workspace
         run: npm pack -w @om-dashboard/front-end
 
