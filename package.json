@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "om-dashboard-front-end",
+  "name": "@om-dashboard/packages",
   "workspaces": [
     "packages/*"
   ],
@@ -8,7 +8,10 @@
     "dev": "turbo dev --parallel",
     "build": "turbo build"
   },
-  "packageManager": "npm@1.22.0",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "20.17.0"
+  },
   "devDependencies": {
     "turbo": "2.2.3"
   }
