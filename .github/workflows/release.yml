@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Verify dist folder
-        run: ls -la ./packages/front-end/dist
+        run: ls -la ./packages/ui/dist
 
       - name: Pack workspace
         run: npm pack -w @om-dashboard/front-end
