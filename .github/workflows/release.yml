@@ -18,9 +18,19 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
 
-      - run: npm ci
-      - run: npm run build
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm publish --access public -w @om-dashboard/front-end
+      - name: Build workspace
+        run: npm run build
+
+      - name: Verify dist folder
+        run: ls -la ./packages/front-end/dist
+
+      - name: Pack workspace
+        run: npm pack -w @om-dashboard/front-end
+
+      - name: Publish to npm
+        run: npm publish --access public -w @om-dashboard/front-end
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
