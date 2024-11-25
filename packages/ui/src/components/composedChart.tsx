@@ -1,13 +1,10 @@
 import {
-  Area,
   Bar,
   CartesianGrid,
   ComposedChart,
   Legend,
   Line,
-  Rectangle,
   ResponsiveContainer,
-  Scatter,
   Tooltip,
   XAxis,
   YAxis,
@@ -16,9 +13,16 @@ import {
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
+type ArgsConfig = {
+  type: "bar" | 'line',
+  value: string | number
+  color: string
+}
+
 type dataRow = {
   label: string;
-  [key: string]: string | number;
+} & {
+  [key: string]: ArgsConfig;
 };
 
 type ColorCollection = Record<string, string>;
@@ -36,6 +40,21 @@ export function ComposedChartDash({
   maxHeight = 600,
   colorCollection = null,
 }: ComposedChartProps) {
+
+  const formattedBodyData = dataBody.reduce((acc: any, item: dataRow) => {
+    const result: any = { label: item.label };
+
+    Object.keys(item).forEach((key) => {
+      if (key !== 'label') {
+        const formattedKey = key.charAt(0) + key.slice(1);
+        result[formattedKey] = item[key].value;
+      }
+    });
+
+    acc.push(result);
+    return acc;
+  }, []);
+
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
 
@@ -57,12 +76,17 @@ export function ComposedChartDash({
         fontWeight: 600,
       }}
     >
-      <ComposedChart width={500} height={400} data={dataBody} margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 40,
-      }}>
+      <ComposedChart
+        width={maxWidth}
+        height={maxHeight}
+        data={formattedBodyData}
+        margin={{
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 40,
+        }}
+      >
         <CartesianGrid stroke="#cdcdcd" />
         <XAxis dataKey={axisLabelKey} />
         <YAxis type="number"
@@ -84,11 +108,40 @@ export function ComposedChartDash({
             }).format(numericValue);
           }}
         />
-
         <Legend />
-        <Line type="monotone" dataKey="entrada" stroke="#00ff55" />
-        <Line type="monotone" dataKey="saída" stroke="#e14043" />
-        <Bar dataKey="resultado" barSize={38} fill="#413ea0" />
+
+        {
+          referenceFields.map((fieldKey, index) => {
+            const fieldType = dataBody[0][fieldKey].type;
+
+            if (fieldType === "line") {
+              return (
+                <Line
+                  key={`line-${fieldKey}-${index}`}
+                  type="monotone"
+                  dataKey={fieldKey}
+                  stroke={COLORS[index]}
+                  strokeWidth={3}
+                  activeDot={{ r: 8 }}
+                />
+              );
+            }
+
+            if (fieldType === "bar") {
+              return (
+                <Bar
+                  key={`bar-${fieldKey}-${index}`}
+                  dataKey={fieldKey}
+                  barSize={38}
+                  fill={COLORS[index]}
+                />
+              );
+            }
+
+            return null;
+          })
+        }
+
       </ComposedChart>
     </ResponsiveContainer>
   );

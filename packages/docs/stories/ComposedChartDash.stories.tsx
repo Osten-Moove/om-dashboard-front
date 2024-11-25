@@ -27,24 +27,51 @@ export default {
     },
   },
   render: (args) => {
-    const data = [
+    const data: any = [
       {
         label: 'Janeiro',
-        entrada: 590,
-        'saída': 800,
-        resultado: -115,
+        Entrada: {
+          type: 'line',
+          value: 400,
+        },
+        'Saída': {
+          type: 'line',
+          value: 650,
+        },
+        Resultado: {
+          type: 'bar',
+          value: -115,
+        },
       },
       {
         label: 'Fevereiro',
-        entrada: 1700,
-        'saída': 967,
-        resultado: 210,
+        Entrada: {
+          type: 'line',
+          value: 1700,
+        },
+        'Saída': {
+          type: 'line',
+          value: 967,
+        },
+        Resultado: {
+          type: 'bar',
+          value: 210,
+        },
       },
       {
         label: 'Março',
-        entrada: 1930,
-        'saída': 1098,
-        resultado: 380,
+        Entrada: {
+          type: 'line',
+          value: 1930,
+        },
+        'Saída': {
+          type: 'line',
+          value: 1098,
+        },
+        Resultado: {
+          type: 'bar',
+          value: 380,
+        },
       },
     ];
 
@@ -64,6 +91,11 @@ export default {
 
 export const Default: StoryObj = {
   args: {
-    maxWidth: 1920
+    maxWidth: 1920,
+    colorCollection: {
+      entrada: '#40c211',
+      saída: '#9c0f0f',
+      resultado: '#2a3d83'
+    }
   },
 };
