@@ -1,6 +1,5 @@
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
 interface CustomizedLabelProps {
@@ -18,26 +17,41 @@ type PieChartDashData = {
   value: number;
 };
 
+type ColorCollection = Record<string, string>;
+
 interface PieChartDashProps {
   size?: number;
   data: PieChartDashData[];
+  colorCollection?: string[] | ColorCollection;
+  legend?: boolean;
 }
 
-export function PieChartDash({ size = 600, data }: PieChartDashProps) {
+export function PieChartDash({ size = 600, data, colorCollection, legend }: PieChartDashProps) {
   const calcToDefineOuterRadius = Math.round((size / 700) * 200);
   const calcToDefineFontSizeInText = Math.round((size / 700) * 28);
 
-  const COLORS = Object.values(Colors);
+  console.log('colorCollection', colorCollection)
+
+  // const COLORS =
 
   const RADIAN = Math.PI / 180;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart width={size} height={size}>
+        <Tooltip
+          contentStyle={{
+            fontSize: `${calcToDefineFontSizeInText * 0.7}px`,
+            fontFamily: Fonts.openSans,
+          }}
+          formatter={(value: number, name: string) => [`${value}`, name]}
+        />
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           labelLine={false}
+          legendType="square"
           label={({
             cx,
             cy,
@@ -72,10 +86,26 @@ export function PieChartDash({ size = 600, data }: PieChartDashProps) {
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+          {colorCollection &&
+            data.map((_, index) => {
+              const color =
+                Array.isArray(colorCollection)
+                  ? colorCollection[index % colorCollection.length]
+                  : colorCollection[data[index].name];
+              return <Cell key={`cell-${index}`} fill={color} />;
+            })}
         </Pie>
+        {legend && (
+          <Legend
+            layout="horizontal"
+            verticalAlign="bottom"
+            align="center"
+            wrapperStyle={{
+              fontSize: `${calcToDefineFontSizeInText * 0.6}px`,
+              fontFamily: Fonts.openSans,
+            }}
+          />
+        )}
       </PieChart>
     </ResponsiveContainer>
   );

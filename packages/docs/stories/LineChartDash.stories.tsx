@@ -20,49 +20,54 @@ export default {
         min: 200,
       },
     },
+    colorCollection: {
+      control: {
+        type: "object",
+      },
+    },
   },
   render: (args) => {
     const data = [
       {
         label: "January",
         Vendas: 4000,
-        Despezas: 2400,
+        Despesas: 2400,
         Lucro: 1250,
       },
       {
         label: "February",
         Vendas: 3000,
-        Despezas: 1398,
+        Despesas: 1398,
         Lucro: 4250,
       },
       {
         label: "March",
         Vendas: 2000,
-        Despezas: 9800,
+        Despesas: 9800,
         Lucro: 2250,
       },
       {
         label: "April",
         Vendas: 2780,
-        Despezas: 3908,
+        Despesas: 3908,
         Lucro: 3250,
       },
       {
         label: "May",
         Vendas: 1890,
-        Despezas: 4800,
+        Despesas: 4800,
         Lucro: 1250,
       },
       {
         label: "June",
         Vendas: 2390,
-        Despezas: 3800,
+        Despesas: 3800,
         Lucro: 2250,
       },
       {
         label: "July",
         Vendas: 3490,
-        Despezas: 4300,
+        Despesas: 4300,
         Lucro: 3250,
       },
     ];
@@ -73,6 +78,7 @@ export default {
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
+          colorCollection={args.colorCollection}
         />
       </div>
     );
@@ -81,5 +87,11 @@ export default {
 } as Meta;
 
 export const Default: StoryObj = {
-  args: {},
+  args: {
+    colorCollection: {
+      vendas: "#5fb612",
+      despesas: "#c3291e",
+      lucro: "#1f46c8"
+    }
+  },
 };
