@@ -16,7 +16,6 @@ import { Fonts } from "../styles/fonts";
 type ArgsConfig = {
   type: "bar" | 'line',
   value: string | number
-  color: string
 }
 
 type dataRow = {
