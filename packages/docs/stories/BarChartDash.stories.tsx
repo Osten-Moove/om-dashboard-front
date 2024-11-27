@@ -97,8 +97,8 @@ export default {
     maxWidth: 700,
     maxHeight: 400,
     barSize: 40,
-    colorCollection: { Vendas: "#d64325" }, // Cores padrão
-    hoverColors: { Vendas: "#82c4ca" }, // Cores de hover padrão
+    colorCollection: { Vendas: "#d64325" },
+    hoverColors: { Vendas: "#82c4ca" },
   },
 } as Meta;
 
