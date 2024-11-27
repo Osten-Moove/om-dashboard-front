@@ -1,9 +1,8 @@
-import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-
 import { PieChartDash } from "@om-dashboard/front-end";
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
-export default {
+const meta: Meta<typeof PieChartDash> = {
   title: "Grafics/Pie Chart Dash",
   component: PieChartDash,
   tags: ["autodocs"],
@@ -14,7 +13,16 @@ export default {
         min: 200,
         max: 1440,
       },
-      defaultValue: 600,
+    },
+    colorCollection: {
+      control: {
+        type: "object",
+      },
+    },
+    legend: {
+      control: {
+        type: "boolean",
+      },
     },
   },
   render: (args) => {
@@ -22,18 +30,27 @@ export default {
       { name: "Group A", value: 400 },
       { name: "Group B", value: 500 },
       { name: "Group C", value: 600 },
-      { name: "Group D", value: 400 },
+      { name: "Group D", value: 750 },
     ];
 
     return (
-      <div style={{ width: "400px", height: "400px", margin: "auto auto" }}>
-        <PieChartDash size={args.size} data={data} />
+      <div style={{ width: "400px", height: "400px", margin: "auto" }}>
+        <PieChartDash
+          size={args.size}
+          data={data}
+          colorCollection={args.colorCollection}
+          legend={args.legend}
+        />
       </div>
     );
   },
-  args: {},
-} as Meta;
+};
 
-export const Default: StoryObj = {
-  args: {},
+export default meta;
+
+export const Default: StoryObj<typeof PieChartDash> = {
+  args: {
+    colorCollection: ["#000", "#00ff00", "#0000ff", "#ffff00"],
+    legend: true,
+  },
 };

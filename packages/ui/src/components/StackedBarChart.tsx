@@ -3,7 +3,6 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
-  LegendProps,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -21,29 +20,25 @@ type dataRow = {
 
 type ColorCollection = Record<string, string>;
 
-interface BarChartDashProps {
+interface StackedBarDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: ColorCollection | null;
   barSize?: number;
   hoverColors?: ColorCollection | null;
-  legends?: { show: boolean, props?: LegendProps } | { show: boolean, comp?: Legend }
 }
 
-export function BarChartDash({
+export function StackedBarDash({
   dataBody,
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
   barSize = 40,
   hoverColors = null,
-}: BarChartDashProps) {
+}: StackedBarDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
-
   const objectFields = Object.keys(dataBody[0]);
-  const axisLabelKey = objectFields[0];
-
   const referenceFields = objectFields.filter((item) => item !== "label");
 
   const COLORS =
@@ -69,19 +64,20 @@ export function BarChartDash({
     >
       <BarChart width={maxWidth} height={maxHeight} data={dataBody}>
         <CartesianGrid strokeDasharray="3 3" />
-
-        <XAxis dataKey={axisLabelKey} />
-
+        <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip />
+        <Tooltip
+          cursor={{ fill: "#f5f5f5" }}
+          contentStyle={{ fontFamily: Fonts.openSans }}
+        />
         <Legend />
 
         {referenceFields.map((item, index) => (
           <Bar
             key={index}
+            stackId="a"
             dataKey={item}
             fill={hoveredBar === item ? HOVER_COLORS[index] : COLORS[index]}
-            radius={6}
             maxBarSize={barSize}
             onMouseOver={() => setHoveredBar(item)}
             onMouseOut={() => setHoveredBar(null)}
