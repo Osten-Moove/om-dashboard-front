@@ -80,8 +80,9 @@ export function LineChartDash({
               type="monotone"
               dataKey={item}
               stroke={COLORS[index]}
-              strokeWidth={3}
+              strokeWidth={2}
               activeDot={{ r: 8 }}
+              strokeDasharray="3 4 10 4"
             />
           );
         })}

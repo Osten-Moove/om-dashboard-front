@@ -3,13 +3,14 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
-  Rectangle,
+  LegendProps,
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from "recharts";
 
+import { useState } from "react";
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -25,6 +26,9 @@ interface BarChartDashProps {
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: ColorCollection | null;
+  barSize?: number;
+  hoverColors?: ColorCollection | null;
+  legends?: { show: boolean, props?: LegendProps } | { show: boolean, comp?: Legend }
 }
 
 export function BarChartDash({
@@ -32,7 +36,11 @@ export function BarChartDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
+  barSize = 40,
+  hoverColors = null,
 }: BarChartDashProps) {
+  const [hoveredBar, setHoveredBar] = useState<string | null>(null);
+
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
 
@@ -42,6 +50,11 @@ export function BarChartDash({
     colorCollection === null
       ? Object.values(Colors)
       : Object.values(colorCollection);
+
+  const HOVER_COLORS =
+    hoverColors === null
+      ? COLORS.map((color) => `${color}CC`)
+      : Object.values(hoverColors);
 
   return (
     <ResponsiveContainer
@@ -63,17 +76,17 @@ export function BarChartDash({
         <Tooltip />
         <Legend />
 
-        {referenceFields.map((item, index) => {
-          return (
-            <Bar
-              key={index}
-              dataKey={item}
-              fill={COLORS[index]}
-              radius={6}
-              activeBar={<Rectangle fill="gold" stroke="purple" />}
-            />
-          );
-        })}
+        {referenceFields.map((item, index) => (
+          <Bar
+            key={index}
+            dataKey={item}
+            fill={hoveredBar === item ? HOVER_COLORS[index] : COLORS[index]}
+            radius={6}
+            maxBarSize={barSize}
+            onMouseOver={() => setHoveredBar(item)}
+            onMouseOut={() => setHoveredBar(null)}
+          />
+        ))}
       </BarChart>
     </ResponsiveContainer>
   );

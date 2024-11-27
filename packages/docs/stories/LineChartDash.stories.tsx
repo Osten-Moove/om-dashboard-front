@@ -92,6 +92,7 @@ export const Default: StoryObj = {
       vendas: "#5fb612",
       despesas: "#c3291e",
       lucro: "#1f46c8"
-    }
+    },
   },
 };
+
