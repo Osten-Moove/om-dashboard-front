@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Update version packages
+        run: npm run version-packages
+
       - name: Build workspace
         run: npm run build
 
