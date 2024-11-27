@@ -1,6 +1,6 @@
 {
   "name": "@om-dashboard/front-end",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
     "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch"
   },
   "files": [
-    "*"
+    "dist"
   ],
   "keywords": [],
   "author": "",
