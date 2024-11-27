@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 import { useState } from "react";
+
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -38,6 +39,7 @@ export function StackedBarDash({
   hoverColors = null,
 }: StackedBarDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
+  
   const objectFields = Object.keys(dataBody[0]);
   const referenceFields = objectFields.filter((item) => item !== "label");
 
