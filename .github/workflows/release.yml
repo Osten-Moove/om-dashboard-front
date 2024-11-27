@@ -21,20 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update version packages
-        run: npm run version-packages
-
       - name: Build workspace
         run: npm run build
 
-      - name: Verify dist folder
-        run: ls -la ./packages/ui/dist
+      - name: Generate changesets packages
+        run: bash ./scripts/update-version-changeset.sh
 
-      - name: Verify src folder
-        run: ls -la ./packages/ui/src
-
-      - name: Verify turbo folder
-        run: ls -la ./packages/ui/.turbo
+      - name: Update version packages
+        run: npm run version-packages
 
       - name: Pack workspace
         run: npm pack -w @om-dashboard/front-end
