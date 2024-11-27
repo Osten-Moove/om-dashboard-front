@@ -1,11 +1,11 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
-import { LineChartDash } from "@om-dashboard/front-end";
+import { StackedBarDash } from "@om-dashboard/front-end";
 
 export default {
-  title: "Grafics/Line Chart Dash",
-  component: LineChartDash,
+  title: "Grafics/Stacked Bar Dash",
+  component: StackedBarDash,
   tags: ["autodocs"],
   argTypes: {
     maxWidth: {
@@ -25,9 +25,22 @@ export default {
         type: "object",
       },
     },
+    barSize: {
+      control: {
+        type: "number",
+        min: 10,
+        max: 500,
+        step: 10,
+      },
+    },
+    hoverColors: {
+      control: {
+        type: "object", // Permite customizar as cores de hover
+      },
+    },
   },
   render: (args) => {
-    const data = [
+    const data: any = [
       {
         label: "January",
         Vendas: 4000,
@@ -58,41 +71,29 @@ export default {
         Despesas: 4800,
         Lucro: 1250,
       },
-      {
-        label: "June",
-        Vendas: 2390,
-        Despesas: 3800,
-        Lucro: 2250,
-      },
-      {
-        label: "July",
-        Vendas: 3490,
-        Despesas: 4300,
-        Lucro: 3250,
-      },
     ];
-
     return (
-      <div style={{ width: "800px", height: "400px" }}>
-        <LineChartDash
+      <div style={{ width: "700px", height: "400px" }}>
+        <StackedBarDash
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
           colorCollection={args.colorCollection}
+          barSize={args.barSize}
+          hoverColors={args.hoverColors}
         />
       </div>
     );
   },
-  args: {},
+  args: {
+    maxWidth: 700,
+    maxHeight: 400,
+    barSize: 40,
+    colorCollection: { Vendas: "#2545d6", Despesas: "#c12f2f", Lucro: "#2cb7a9" },
+    hoverColors: { Vendas: "#000", Despesas: "#000", Lucro: "#000" },
+  },
 } as Meta;
 
 export const Default: StoryObj = {
-  args: {
-    colorCollection: {
-      vendas: "#5fb612",
-      despesas: "#c3291e",
-      lucro: "#1f46c8"
-    },
-  },
+  args: {},
 };
-

@@ -1,5 +1,5 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
 import { TableDash } from "@om-dashboard/front-end";
 
@@ -8,11 +8,6 @@ export default {
   component: TableDash,
   tags: ["autodocs"],
   argTypes: {
-    footerText: {
-      control: {
-        type: "text",
-      },
-    },
     variant: {
       control: {
         type: "select",

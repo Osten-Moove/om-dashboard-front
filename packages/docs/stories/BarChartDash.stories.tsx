@@ -1,5 +1,5 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
 import { BarChartDash } from "@om-dashboard/front-end";
 
@@ -23,6 +23,19 @@ export default {
     colorCollection: {
       control: {
         type: "object",
+      },
+    },
+    barSize: {
+      control: {
+        type: "number",
+        min: 10,
+        max: 500,
+        step: 10,
+      },
+    },
+    hoverColors: {
+      control: {
+        type: "object", // Permite customizar as cores de hover
       },
     },
   },
@@ -59,7 +72,6 @@ export default {
         Lucro: 1250,
       },
     ];
-
     return (
       <div style={{ width: "700px", height: "400px" }}>
         <BarChartDash
@@ -67,11 +79,27 @@ export default {
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
           colorCollection={args.colorCollection}
+          barSize={args.barSize}
+          hoverColors={args.hoverColors}
+        />
+        <BarChartDash
+          dataBody={data}
+          maxWidth={args.maxWidth}
+          maxHeight={args.maxHeight}
+          colorCollection={args.colorCollection}
+          barSize={args.barSize}
+          hoverColors={args.hoverColors}
         />
       </div>
     );
   },
-  args: {},
+  args: {
+    maxWidth: 700,
+    maxHeight: 400,
+    barSize: 40,
+    colorCollection: { Vendas: "#d64325" },
+    hoverColors: { Vendas: "#82c4ca" },
+  },
 } as Meta;
 
 export const Default: StoryObj = {
