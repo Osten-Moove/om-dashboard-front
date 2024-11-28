@@ -24,12 +24,6 @@ jobs:
       - name: Build workspace
         run: npm run build
 
-      - name: Generate changesets packages
-        run: bash ./scripts/update-version-changeset.sh
-
-      - name: Update version packages
-        run: npm run version-packages
-
       - name: Pack workspace
         run: npm pack -w @om-dashboard/front-end
 
