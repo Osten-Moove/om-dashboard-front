@@ -10,6 +10,8 @@ import {
   YAxis,
 } from "recharts";
 
+import { Margin } from 'recharts/types/util/types';
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -28,9 +30,12 @@ type ColorCollection = Record<string, string>;
 
 interface ComposedChartProps {
   dataBody: dataRow[];
+  styles: { [key: string | number]: string; }
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: ColorCollection | null;
+  margin: Margin;
+  formatValue: any[]
 }
 
 export function ComposedChartDash({
@@ -38,6 +43,9 @@ export function ComposedChartDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
+  margin,
+  styles,
+  formatValue
 }: ComposedChartProps) {
 
   const formattedBodyData = dataBody.reduce((acc: any, item: dataRow) => {
@@ -79,39 +87,21 @@ export function ComposedChartDash({
         width={maxWidth}
         height={maxHeight}
         data={formattedBodyData}
-        margin={{
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 40,
-        }}
+        margin={margin}
       >
         <CartesianGrid stroke="#cdcdcd" />
         <XAxis dataKey={axisLabelKey} />
         <YAxis type="number"
-          tickFormatter={(value) => {
-            return new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            }).format(value);
-          }}
+          tickFormatter={(value) => format(value as number, formatValue)}
         />
         <Tooltip
-          formatter={(value) => {
-            const numericValue = typeof value === 'number' ? value : parseFloat(value as string) || 0;
-            return new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            }).format(numericValue);
-          }}
+          formatter={(value) => format(value as number, formatValue)}
         />
         <Legend />
 
         {
           referenceFields.map((fieldKey, index) => {
-            const fieldType = dataBody[0][fieldKey].type;
+            const fieldType = styles[fieldKey]
 
             if (fieldType === "line") {
               return (

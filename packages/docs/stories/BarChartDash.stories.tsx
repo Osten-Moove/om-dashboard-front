@@ -25,6 +25,11 @@ export default {
         type: "object",
       },
     },
+    margin: {
+      control: {
+        type: "object",
+      },
+    },
     barSize: {
       control: {
         type: "number",
@@ -35,40 +40,40 @@ export default {
     },
     hoverColors: {
       control: {
-        type: "object", // Permite customizar as cores de hover
+        type: "object",
       },
     },
   },
   render: (args) => {
     const data = [
       {
-        label: "January",
+        label: "Janeiro",
         Vendas: 4000,
-        Despezas: 2400,
+        Despesas: 2400,
         Lucro: 1250,
       },
       {
-        label: "February",
+        label: "Fevereiro",
         Vendas: 3000,
-        Despezas: 1398,
+        Despesas: 1398,
         Lucro: 4250,
       },
       {
-        label: "March",
+        label: "Março",
         Vendas: 2000,
-        Despezas: 9800,
+        Despesas: 9800,
         Lucro: 2250,
       },
       {
-        label: "April",
+        label: "Abril",
         Vendas: 2780,
-        Despezas: 3908,
+        Despesas: 3908,
         Lucro: 3250,
       },
       {
-        label: "May",
+        label: "Maio",
         Vendas: 1890,
-        Despezas: 4800,
+        Despesas: 4800,
         Lucro: 1250,
       },
     ];
@@ -81,14 +86,7 @@ export default {
           colorCollection={args.colorCollection}
           barSize={args.barSize}
           hoverColors={args.hoverColors}
-        />
-        <BarChartDash
-          dataBody={data}
-          maxWidth={args.maxWidth}
-          maxHeight={args.maxHeight}
-          colorCollection={args.colorCollection}
-          barSize={args.barSize}
-          hoverColors={args.hoverColors}
+          margin={args.margin}
         />
       </div>
     );
@@ -97,8 +95,14 @@ export default {
     maxWidth: 700,
     maxHeight: 400,
     barSize: 40,
-    colorCollection: { Vendas: "#d64325" },
-    hoverColors: { Vendas: "#82c4ca" },
+    colorCollection: { Vendas: "#387a0f", Despesas: "#ae2020", Lucro: "#0d2f85" },
+    hoverColors: { Vendas: "#000", Despesas: "#000", Lucro: "#000" },
+    margin: {
+      top: 20,
+      right: 20,
+      left: 80,
+      bottom: 20,
+    },
   },
 } as Meta;
 

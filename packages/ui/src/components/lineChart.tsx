@@ -9,6 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
+import { Margin } from 'recharts/types/util/types';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -24,6 +25,7 @@ interface LineChartDashProps {
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: ColorCollection | null;
+  margin: Margin
 }
 
 export function LineChartDash({
@@ -31,6 +33,7 @@ export function LineChartDash({
   maxWidth = 800,
   maxHeight = 800,
   colorCollection = null,
+  margin,
 }: LineChartDashProps) {
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
@@ -58,12 +61,7 @@ export function LineChartDash({
         width={maxWidth}
         height={maxHeight}
         data={dataBody}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
+        margin={margin}
       >
         <CartesianGrid strokeDasharray="3 3" />
 

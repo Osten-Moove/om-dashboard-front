@@ -25,6 +25,11 @@ export default {
         type: "object",
       },
     },
+    margin: {
+      control: {
+        type: "object",
+      },
+    },
   },
   render: (args) => {
     const data = [
@@ -79,6 +84,7 @@ export default {
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
           colorCollection={args.colorCollection}
+          margin={args.margin}
         />
       </div>
     );
@@ -92,6 +98,12 @@ export const Default: StoryObj = {
       vendas: "#5fb612",
       despesas: "#c3291e",
       lucro: "#1f46c8"
+    },
+    margin: {
+      top: 20,
+      right: 20,
+      left: 80,
+      bottom: 20,
     },
   },
 };
