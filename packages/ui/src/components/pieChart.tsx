@@ -1,6 +1,8 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
+import { format } from '../helpers/format';
 import { Fonts } from "../styles/fonts";
+import { Collection, Format } from '../types';
 
 interface CustomizedLabelProps {
   cx: number;
@@ -12,40 +14,36 @@ interface CustomizedLabelProps {
   index: number;
 }
 
+type Styles = {
+  legend: boolean
+  size: number
+}
+
 type PieChartDashData = {
   name: string;
   value: number;
 };
 
-type ColorCollection = Record<string, string>;
-
 interface PieChartDashProps {
-  size?: number;
   data: PieChartDashData[];
-  colorCollection?: string[] | ColorCollection;
-  legend?: boolean;
+  colorCollection?: string[] | Collection;
+  styles: Styles
+  formatValue: Format
 }
 
-export function PieChartDash({ size = 600, data, colorCollection, legend }: PieChartDashProps) {
-  const calcToDefineOuterRadius = Math.round((size / 700) * 200);
-  const calcToDefineFontSizeInText = Math.round((size / 700) * 28);
-
-  console.log('colorCollection', colorCollection)
-
-  // const COLORS =
+export function PieChartDash({ styles, data, colorCollection, formatValue }: PieChartDashProps) {
+  const calcToDefineOuterRadius = Math.round((styles.size / 700) * 200);
+  const calcToDefineFontSizeInText = Math.round((styles.size / 700) * 28);
 
   const RADIAN = Math.PI / 180;
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={size} height={size}>
+      <PieChart width={styles.size} height={styles.size}>
         <Tooltip
-          contentStyle={{
-            fontSize: `${calcToDefineFontSizeInText * 0.7}px`,
-            fontFamily: Fonts.openSans,
-          }}
-          formatter={(value: number, name: string) => [`${value}`, name]}
+          formatter={(value) => format(value as number, formatValue)}
         />
+
         <Pie
           data={data}
           cx="50%"
@@ -59,7 +57,6 @@ export function PieChartDash({ size = 600, data, colorCollection, legend }: PieC
             innerRadius,
             outerRadius,
             percent,
-            index,
           }: CustomizedLabelProps) => {
             const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
             const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -95,17 +92,9 @@ export function PieChartDash({ size = 600, data, colorCollection, legend }: PieC
               return <Cell key={`cell-${index}`} fill={color} />;
             })}
         </Pie>
-        {legend && (
-          <Legend
-            layout="horizontal"
-            verticalAlign="bottom"
-            align="center"
-            wrapperStyle={{
-              fontSize: `${calcToDefineFontSizeInText * 0.6}px`,
-              fontFamily: Fonts.openSans,
-            }}
-          />
-        )}
+
+        {styles.legend && <Legend />}
+
       </PieChart>
     </ResponsiveContainer>
   );

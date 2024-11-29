@@ -13,21 +13,22 @@ import { useState } from "react";
 
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
+import { Collection, dataRow, Format } from '../types';
+import { format } from '../helpers/format';
 
-type dataRow = {
-  label: string;
-  [key: string]: string | number;
-};
-
-type ColorCollection = Record<string, string>;
-
+type Styles = {
+  barSize: number
+  legend: boolean;
+  stackId: string
+}
 interface StackedBarDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
-  colorCollection?: ColorCollection | null;
-  barSize?: number;
-  hoverColors?: ColorCollection | null;
+  colorCollection?: Collection | null;
+  styles: Styles
+  formatValue: Format,
+  hoverColors: Collection | null;
 }
 
 export function StackedBarDash({
@@ -35,11 +36,12 @@ export function StackedBarDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
-  barSize = 40,
-  hoverColors = null,
+  styles,
+  formatValue,
+  hoverColors,
 }: StackedBarDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
-  
+
   const objectFields = Object.keys(dataBody[0]);
   const referenceFields = objectFields.filter((item) => item !== "label");
 
@@ -67,20 +69,21 @@ export function StackedBarDash({
       <BarChart width={maxWidth} height={maxHeight} data={dataBody}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip
-          cursor={{ fill: "#f5f5f5" }}
-          contentStyle={{ fontFamily: Fonts.openSans }}
+        <YAxis type="number"
+          tickFormatter={(value) => format(value as number, formatValue)}
         />
-        <Legend />
+        <Tooltip
+          formatter={(value) => format(value as number, formatValue)}
+        />
+        {styles.legend && <Legend />}
 
         {referenceFields.map((item, index) => (
           <Bar
             key={index}
-            stackId="a"
+            stackId={styles.stackId}
             dataKey={item}
             fill={hoveredBar === item ? HOVER_COLORS[index] : COLORS[index]}
-            maxBarSize={barSize}
+            maxBarSize={styles.barSize}
             onMouseOver={() => setHoveredBar(item)}
             onMouseOut={() => setHoveredBar(null)}
           />

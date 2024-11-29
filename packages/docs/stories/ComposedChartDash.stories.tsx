@@ -43,7 +43,13 @@ export default {
       description: `
         OPÇÕES:
 
-        line, bar
+        {
+          type: "monotone" | "linear" | "step";
+          strokeWidth: number;
+          activeDot?: { r: number };
+          barSize: number;
+          legend: boolean;
+        };
       `,
     },
     maxWidth: {
@@ -74,48 +80,21 @@ export default {
     const data: any = [
       {
         label: 'Janeiro',
-        Entrada: {
-          type: 'line',
-          value: 400,
-        },
-        'Saída': {
-          type: 'line',
-          value: 650,
-        },
-        Resultado: {
-          type: 'bar',
-          value: -115,
-        },
+        Entrada: 400,
+        'Saída': 650,
+        Resultado: -115,
       },
       {
         label: 'Fevereiro',
-        Entrada: {
-          type: 'line',
-          value: 1700,
-        },
-        'Saída': {
-          type: 'line',
-          value: 967,
-        },
-        Resultado: {
-          type: 'bar',
-          value: 210,
-        },
+        Entrada: 1700,
+        'Saída': 967,
+        Resultado: 210,
       },
       {
         label: 'Março',
-        Entrada: {
-          type: 'line',
-          value: 1930,
-        },
-        'Saída': {
-          type: 'line',
-          value: 1098,
-        },
-        Resultado: {
-          type: 'bar',
-          value: 380,
-        },
+        Entrada: 1930,
+        'Saída': 1098,
+        Resultado: 380
       },
     ];
 
@@ -141,7 +120,12 @@ export const Default: StoryObj = {
     styles: {
       Entrada: 'line',
       Saída: 'line',
-      Resultado: 'bar'
+      Resultado: 'bar',
+      type: 'linear',
+      legend: true,
+      strokeWidth: 3,
+      activeDot: { r: 8 },
+      barSize: 38
     },
     formatValue: [
       {

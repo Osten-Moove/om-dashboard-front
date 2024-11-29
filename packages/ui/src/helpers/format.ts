@@ -1,4 +1,4 @@
-import { Format } from '../components/lineChart';
+import { Format } from '../types';
 
 export function format(value: number, format: Format) {
 

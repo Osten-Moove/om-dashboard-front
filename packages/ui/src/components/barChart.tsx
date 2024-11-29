@@ -15,23 +15,22 @@ import { Margin } from 'recharts/types/util/types';
 import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
+import { Collection, dataRow, Format } from '../types';
 
-type dataRow = {
-  label: string;
-  [key: string]: string | number;
-};
-
-type Collection = Record<string, string>;
-
+type Styles = {
+  legend: boolean;
+  barSize: number,
+  radius: number
+}
 interface BarChartDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: Collection | null;
-  barSize?: number;
   hoverColors?: Collection | null;
   margin: Margin
-  formatValue: any[]
+  formatValue: Format
+  styles: Styles
 }
 
 export function BarChartDash({
@@ -39,10 +38,10 @@ export function BarChartDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
-  barSize = 40,
   hoverColors = null,
   margin,
   formatValue,
+  styles,
 }: BarChartDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
   const objectFields = Object.keys(dataBody[0]);
@@ -86,15 +85,15 @@ export function BarChartDash({
         <Tooltip
           formatter={(value) => format(value as number, formatValue)}
         />
-        <Legend />
+        {styles.legend && <Legend />}
 
         {referenceFields.map((item, index) => (
           <Bar
             key={index}
             dataKey={item}
             fill={hoveredBar === item ? HOVER_COLORS[index] : COLORS[index]}
-            radius={6}
-            maxBarSize={barSize}
+            radius={styles.radius}
+            maxBarSize={styles.barSize}
             onMouseOver={() => setHoveredBar(item)}
             onMouseOut={() => setHoveredBar(null)}
           />

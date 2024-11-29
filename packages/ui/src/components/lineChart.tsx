@@ -10,16 +10,10 @@ import {
 } from "recharts";
 
 import { Margin } from 'recharts/types/util/types';
+import { Collection, dataRow, Format } from "../../src/types";
 import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
-
-type dataRow = {
-  label: string;
-  [key: string]: string | number;
-};
-
-type Collection = Record<string, string>;
 
 type Styles = {
   strokeStyle: string
@@ -28,22 +22,6 @@ type Styles = {
   activeDot?: Record<string, number> | { r: number };
   legend: boolean;
 }
-
-type CurrencyFormat = {
-  type: "currency";
-  currency: string;
-  minimumFractionDigits?: number;
-};
-
-type NumberFormat = {
-  type: "number";
-};
-
-type PercentageFormat = {
-  type: "percentage";
-};
-
-export type Format = CurrencyFormat | NumberFormat | PercentageFormat;
 
 interface LineChartDashProps {
   dataBody: dataRow[];
@@ -74,8 +52,6 @@ export function LineChartDash({
       ? Object.values(Colors)
       : Object.values(colorCollection);
 
-  console.log(styles.type)
-
   return (
     <ResponsiveContainer
       width="100%"
@@ -104,9 +80,9 @@ export function LineChartDash({
         <Tooltip
           formatter={(value) => format(value as number, formatValue)}
         />
-        
+
         {styles.legend && <Legend />}
-        
+
         {referenceFields.map((item, index) => {
           return (
             <Line

@@ -7,22 +7,41 @@ const meta: Meta<typeof PieChartDash> = {
   component: PieChartDash,
   tags: ["autodocs"],
   argTypes: {
-    size: {
+    formatValue: {
       control: {
-        type: "number",
-        min: 200,
-        max: 1440,
+        type: 'object'
       },
+      description: `
+        OPÇÕES:
+
+        {
+          "type": "currency",
+          "currency": "BRL",
+          "minimumFractionDigits": 2
+        }
+
+        {
+          "type": "number"
+        }
+      `,
     },
     colorCollection: {
       control: {
         type: "object",
       },
     },
-    legend: {
+    styles: {
       control: {
-        type: "boolean",
+        type: 'object'
       },
+      description: `
+        OPÇÕES:
+
+        {
+          legend: true
+          size: number
+        }
+      `,
     },
   },
   render: (args) => {
@@ -36,10 +55,10 @@ const meta: Meta<typeof PieChartDash> = {
     return (
       <div style={{ width: "400px", height: "400px", margin: "auto" }}>
         <PieChartDash
-          size={args.size}
           data={data}
           colorCollection={args.colorCollection}
-          legend={args.legend}
+          styles={args.styles}
+          formatValue={args.formatValue}
         />
       </div>
     );
@@ -51,6 +70,14 @@ export default meta;
 export const Default: StoryObj<typeof PieChartDash> = {
   args: {
     colorCollection: ["#000", "#00ff00", "#0000ff", "#ffff00"],
-    legend: true,
+    styles: {
+      legend: true,
+      size: 500
+    },
+    formatValue: {
+      "type": "currency",
+      "currency": "BRL",
+      "minimumFractionDigits": 2
+    }
   },
 };

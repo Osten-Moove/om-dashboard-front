@@ -15,25 +15,19 @@ export default {
       description: `
         OPÇÕES:
 
-        [
-          {
-            "type": "currency",
-            "currency": "BRL",
-            "minimumFractionDigits": 2
-          }
-        ]
+        {
+          "type": "currency",
+          "currency": "BRL",
+          "minimumFractionDigits": 2
+        }
 
-        [
-          {
-            "type": "number"
-          }
-        ]
+        {
+          "type": "number"
+        }
 
-        [
-          {
-            "type": "percentage"
-          }
-        ]
+        {
+          "type": "percentage"
+        }
       `,
     },
     maxWidth: {
@@ -58,18 +52,24 @@ export default {
         type: "object",
       },
     },
-    barSize: {
-      control: {
-        type: "number",
-        min: 10,
-        max: 500,
-        step: 10,
-      },
-    },
     hoverColors: {
       control: {
         type: "object",
       },
+    },
+    styles: {
+      control: {
+        type: 'object'
+      },
+      description: `
+        OPÇÕES:
+
+        {
+          legend: boolean;
+          barSize: number,
+          radius: number
+        }
+      `,
     },
   },
   render: (args) => {
@@ -113,17 +113,25 @@ export default {
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
           colorCollection={args.colorCollection}
-          barSize={args.barSize}
           hoverColors={args.hoverColors}
           margin={args.margin}
+          styles={args.styles}
         />
       </div>
     );
   },
+  args: {},
+} as Meta;
+
+export const Default: StoryObj = {
   args: {
+    formatValue: {
+      "type": "currency",
+      "currency": "BRL",
+      "minimumFractionDigits": 2
+    },
     maxWidth: 700,
     maxHeight: 400,
-    barSize: 40,
     colorCollection: { Vendas: "#387a0f", Despesas: "#ae2020", Lucro: "#0d2f85" },
     hoverColors: { Vendas: "#000", Despesas: "#000", Lucro: "#000" },
     margin: {
@@ -132,15 +140,10 @@ export default {
       left: 80,
       bottom: 20,
     },
-  },
-} as Meta;
-
-export const Default: StoryObj = {
-  args: {
-    formatValue: [
-      {
-        type: 'percentage',
-      },
-    ],
+    styles: {
+      legend: true,
+      barSize: 40,
+      radius: 6
+    },
   },
 };
