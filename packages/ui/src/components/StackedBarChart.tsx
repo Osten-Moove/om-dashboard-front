@@ -42,7 +42,8 @@ export function StackedBarDash({
 }: StackedBarDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
 
-  const objectFields = Object.keys(dataBody[0]);
+  const objectFields = dataBody && dataBody[0] ? Object.keys(dataBody[0]) : [];
+
   const referenceFields = objectFields.filter((item) => item !== "label");
 
   const COLORS =
