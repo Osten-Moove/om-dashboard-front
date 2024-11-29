@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 
 import { Margin } from 'recharts/types/util/types';
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -30,6 +31,7 @@ interface BarChartDashProps {
   barSize?: number;
   hoverColors?: Collection | null;
   margin: Margin
+  formatValue: any[]
 }
 
 export function BarChartDash({
@@ -40,6 +42,7 @@ export function BarChartDash({
   barSize = 40,
   hoverColors = null,
   margin,
+  formatValue,
 }: BarChartDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
   const objectFields = Object.keys(dataBody[0]);
@@ -77,24 +80,11 @@ export function BarChartDash({
 
         <XAxis dataKey={axisLabelKey} />
 
-        <YAxis
-          tickFormatter={(value) => {
-            return new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            }).format(value);
-          }}
+        <YAxis type="number"
+          tickFormatter={(value) => format(value as number, formatValue)}
         />
         <Tooltip
-          formatter={(value) => {
-            const numericValue = typeof value === 'number' ? value : parseFloat(value as string) || 0;
-            return new Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            }).format(numericValue);
-          }}
+          formatter={(value) => format(value as number, formatValue)}
         />
         <Legend />
 

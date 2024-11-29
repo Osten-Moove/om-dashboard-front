@@ -8,6 +8,34 @@ export default {
   component: BarChartDash,
   tags: ["autodocs"],
   argTypes: {
+    formatValue: {
+      control: {
+        type: 'object'
+      },
+      description: `
+        OPÇÕES:
+
+        [
+          {
+            "type": "currency",
+            "currency": "BRL",
+            "minimumFractionDigits": 2
+          }
+        ]
+
+        [
+          {
+            "type": "number"
+          }
+        ]
+
+        [
+          {
+            "type": "percentage"
+          }
+        ]
+      `,
+    },
     maxWidth: {
       control: {
         type: "number",
@@ -80,6 +108,7 @@ export default {
     return (
       <div style={{ width: "700px", height: "400px" }}>
         <BarChartDash
+          formatValue={args.formatValue}
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
@@ -107,5 +136,11 @@ export default {
 } as Meta;
 
 export const Default: StoryObj = {
-  args: {},
+  args: {
+    formatValue: [
+      {
+        type: 'percentage',
+      },
+    ],
+  },
 };

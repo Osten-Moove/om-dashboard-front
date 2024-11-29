@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 import { Margin } from 'recharts/types/util/types';
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
@@ -18,14 +19,40 @@ type dataRow = {
   [key: string]: string | number;
 };
 
-type ColorCollection = Record<string, string>;
+type Collection = Record<string, string>;
+
+type Styles = {
+  strokeStyle: string
+  strokeWidth: string,
+  type: "monotone" | "linear" | "step";
+  activeDot?: Record<string, number> | { r: number };
+  legend: boolean;
+}
+
+type CurrencyFormat = {
+  type: "currency";
+  currency: string;
+  minimumFractionDigits?: number;
+};
+
+type NumberFormat = {
+  type: "number";
+};
+
+type PercentageFormat = {
+  type: "percentage";
+};
+
+export type Format = CurrencyFormat | NumberFormat | PercentageFormat;
 
 interface LineChartDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
-  colorCollection?: ColorCollection | null;
+  colorCollection?: Collection | null;
   margin: Margin
+  styles: Styles,
+  formatValue: Format,
 }
 
 export function LineChartDash({
@@ -34,6 +61,8 @@ export function LineChartDash({
   maxHeight = 800,
   colorCollection = null,
   margin,
+  styles,
+  formatValue,
 }: LineChartDashProps) {
   const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
@@ -44,6 +73,8 @@ export function LineChartDash({
     colorCollection === null
       ? Object.values(Colors)
       : Object.values(colorCollection);
+
+  console.log(styles.type)
 
   return (
     <ResponsiveContainer
@@ -67,20 +98,25 @@ export function LineChartDash({
 
         <XAxis dataKey={axisLabelKey} />
 
-        <YAxis />
-        <Tooltip />
-        <Legend />
-
+        <YAxis type="number"
+          tickFormatter={(value) => format(value as number, formatValue)}
+        />
+        <Tooltip
+          formatter={(value) => format(value as number, formatValue)}
+        />
+        
+        {styles.legend && <Legend />}
+        
         {referenceFields.map((item, index) => {
           return (
             <Line
               key={index}
-              type="monotone"
+              type={styles.type}
               dataKey={item}
               stroke={COLORS[index]}
-              strokeWidth={2}
-              activeDot={{ r: 8 }}
-              strokeDasharray="3 4 10 4"
+              strokeWidth={styles.strokeWidth}
+              activeDot={styles.activeDot}
+              strokeDasharray={styles.strokeStyle}
             />
           );
         })}
