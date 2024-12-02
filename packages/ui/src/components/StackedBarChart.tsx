@@ -15,6 +15,7 @@ import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 import { Collection, dataRow, Format } from '../types';
 import { format } from '../helpers/format';
+import { Margin } from 'recharts/types/util/types';
 
 type Styles = {
   barSize: number
@@ -27,6 +28,7 @@ interface StackedBarDashProps {
   maxHeight?: number;
   colorCollection?: Collection | null;
   styles: Styles
+  margin: Margin
   formatValue: Format,
   hoverColors: Collection | null;
 }
@@ -37,6 +39,7 @@ export function StackedBarDash({
   maxHeight = 600,
   colorCollection = null,
   styles,
+  margin,
   formatValue,
   hoverColors,
 }: StackedBarDashProps) {
@@ -67,7 +70,12 @@ export function StackedBarDash({
         fontWeight: 600,
       }}
     >
-      <BarChart width={maxWidth} height={maxHeight} data={dataBody}>
+      <BarChart
+        width={maxWidth}
+        height={maxHeight}
+        data={dataBody}
+        margin={margin}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis type="number"

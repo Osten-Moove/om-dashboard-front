@@ -8,6 +8,11 @@ export default {
   component: StackedBarDash,
   tags: ["autodocs"],
   argTypes: {
+    margin: {
+      control: {
+        type: "object",
+      },
+    },
     formatValue: {
       control: {
         type: 'object'
@@ -110,6 +115,7 @@ export default {
           styles={args.styles}
           formatValue={args.formatValue}
           hoverColors={args.hoverColors}
+          margin={args.margin}
         />
       </div>
     );
@@ -133,5 +139,11 @@ export const Default: StoryObj = {
       stackId: 'a'
     },
     hoverColors: { Vendas: "#000", Despesas: "#000", Lucro: "#000" },
+    margin: {
+      top: 20,
+      right: 20,
+      left: 80,
+      bottom: 20,
+    },
   },
 };
