@@ -3,7 +3,6 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
-  LegendProps,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,24 +11,26 @@ import {
 
 import { useState } from "react";
 
+import { Margin } from 'recharts/types/util/types';
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
+import { Collection, dataRow, Format } from '../types';
 
-type dataRow = {
-  label: string;
-  [key: string]: string | number;
-};
-
-type ColorCollection = Record<string, string>;
-
+type Styles = {
+  legend: boolean;
+  barSize: number,
+  radius: number
+}
 interface BarChartDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
-  colorCollection?: ColorCollection | null;
-  barSize?: number;
-  hoverColors?: ColorCollection | null;
-  legends?: { show: boolean, props?: LegendProps } | { show: boolean, comp?: Legend }
+  colorCollection?: Collection | null;
+  hoverColors?: Collection | null;
+  margin: Margin
+  formatValue: Format
+  styles: Styles
 }
 
 export function BarChartDash({
@@ -37,14 +38,15 @@ export function BarChartDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
-  barSize = 40,
   hoverColors = null,
+  margin,
+  formatValue,
+  styles,
 }: BarChartDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
+  const objectFields = dataBody && dataBody[0] ? Object.keys(dataBody[0]) : [];
 
-  const objectFields = Object.keys(dataBody[0]);
   const axisLabelKey = objectFields[0];
-
   const referenceFields = objectFields.filter((item) => item !== "label");
 
   const COLORS =
@@ -68,22 +70,31 @@ export function BarChartDash({
         fontWeight: 600,
       }}
     >
-      <BarChart width={maxWidth} height={maxHeight} data={dataBody}>
+      <BarChart
+        width={maxWidth}
+        height={maxHeight}
+        data={dataBody}
+        margin={margin}
+      >
         <CartesianGrid strokeDasharray="3 3" />
 
         <XAxis dataKey={axisLabelKey} />
 
-        <YAxis />
-        <Tooltip />
-        <Legend />
+        <YAxis type="number"
+          tickFormatter={(value) => format(value as number, formatValue)}
+        />
+        <Tooltip
+          formatter={(value) => format(value as number, formatValue)}
+        />
+        {styles.legend && <Legend />}
 
         {referenceFields.map((item, index) => (
           <Bar
             key={index}
             dataKey={item}
             fill={hoveredBar === item ? HOVER_COLORS[index] : COLORS[index]}
-            radius={6}
-            maxBarSize={barSize}
+            radius={styles.radius}
+            maxBarSize={styles.barSize}
             onMouseOver={() => setHoveredBar(item)}
             onMouseOut={() => setHoveredBar(null)}
           />

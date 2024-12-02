@@ -9,21 +9,28 @@ import {
   YAxis,
 } from "recharts";
 
+import { Margin } from 'recharts/types/util/types';
+import { Collection, dataRow, Format } from "../../src/types";
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
-type dataRow = {
-  label: string;
-  [key: string]: string | number;
-};
-
-type ColorCollection = Record<string, string>;
+type Styles = {
+  strokeStyle: string
+  strokeWidth: string,
+  type: "monotone" | "linear" | "step";
+  activeDot?: Record<string, number> | { r: number };
+  legend: boolean;
+}
 
 interface LineChartDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
-  colorCollection?: ColorCollection | null;
+  colorCollection?: Collection | null;
+  margin: Margin
+  styles: Styles,
+  formatValue: Format,
 }
 
 export function LineChartDash({
@@ -31,8 +38,12 @@ export function LineChartDash({
   maxWidth = 800,
   maxHeight = 800,
   colorCollection = null,
+  margin,
+  styles,
+  formatValue,
 }: LineChartDashProps) {
-  const objectFields = Object.keys(dataBody[0]);
+  const objectFields = dataBody && dataBody[0] ? Object.keys(dataBody[0]) : [];
+
   const axisLabelKey = objectFields[0];
 
   const referenceFields = objectFields.filter((item) => item !== "label");
@@ -58,31 +69,31 @@ export function LineChartDash({
         width={maxWidth}
         height={maxHeight}
         data={dataBody}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
+        margin={margin}
       >
         <CartesianGrid strokeDasharray="3 3" />
 
         <XAxis dataKey={axisLabelKey} />
 
-        <YAxis />
-        <Tooltip />
-        <Legend />
+        <YAxis type="number"
+          tickFormatter={(value) => format(value as number, formatValue)}
+        />
+        <Tooltip
+          formatter={(value) => format(value as number, formatValue)}
+        />
+
+        {styles.legend && <Legend />}
 
         {referenceFields.map((item, index) => {
           return (
             <Line
               key={index}
-              type="monotone"
+              type={styles.type}
               dataKey={item}
               stroke={COLORS[index]}
-              strokeWidth={2}
-              activeDot={{ r: 8 }}
-              strokeDasharray="3 4 10 4"
+              strokeWidth={styles.strokeWidth}
+              activeDot={styles.activeDot}
+              strokeDasharray={styles.strokeStyle}
             />
           );
         })}

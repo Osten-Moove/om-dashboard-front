@@ -1,4 +1,4 @@
-import { TableContainer } from "./tableDash.styles";
+import { TableContainer } from '../styles/tableDash.styles';
 
 type DataRow<T extends Array<string>> = {
   [key in T[number]]: number | string;

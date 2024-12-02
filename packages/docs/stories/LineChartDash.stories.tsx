@@ -1,5 +1,5 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
 import { LineChartDash } from "@om-dashboard/front-end";
 
@@ -8,6 +8,42 @@ export default {
   component: LineChartDash,
   tags: ["autodocs"],
   argTypes: {
+    formatValue: {
+      control: {
+        type: 'object'
+      },
+      description: `
+        OPÇÕES:
+
+        {
+          "type": "currency",
+          "currency": "BRL",
+          "minimumFractionDigits": 2
+        }
+
+        {
+          "type": "number"
+        }
+
+        {
+          "type": "percentage"
+        }
+      `,
+    },
+    styles: {
+      control: {
+        type: 'object'
+      },
+      description: `
+        OPÇÕES:
+
+        {
+          strokeStyle: "3 4 10 4",
+          strokeWidth: "2",
+          type: "monotone"
+        }
+      `,
+    },
     maxWidth: {
       control: {
         type: "number",
@@ -25,47 +61,52 @@ export default {
         type: "object",
       },
     },
+    margin: {
+      control: {
+        type: "object",
+      },
+    },
   },
   render: (args) => {
     const data = [
       {
-        label: "January",
+        label: "Janeiro",
         Vendas: 4000,
         Despesas: 2400,
         Lucro: 1250,
       },
       {
-        label: "February",
+        label: "Fevereiro",
         Vendas: 3000,
         Despesas: 1398,
         Lucro: 4250,
       },
       {
-        label: "March",
+        label: "Março",
         Vendas: 2000,
         Despesas: 9800,
         Lucro: 2250,
       },
       {
-        label: "April",
+        label: "Abril",
         Vendas: 2780,
         Despesas: 3908,
         Lucro: 3250,
       },
       {
-        label: "May",
+        label: "Maio",
         Vendas: 1890,
         Despesas: 4800,
         Lucro: 1250,
       },
       {
-        label: "June",
+        label: "Junho",
         Vendas: 2390,
         Despesas: 3800,
         Lucro: 2250,
       },
       {
-        label: "July",
+        label: "Julho",
         Vendas: 3490,
         Despesas: 4300,
         Lucro: 3250,
@@ -75,10 +116,13 @@ export default {
     return (
       <div style={{ width: "800px", height: "400px" }}>
         <LineChartDash
+          formatValue={args.formatValue}
           dataBody={data}
           maxWidth={args.maxWidth}
           maxHeight={args.maxHeight}
           colorCollection={args.colorCollection}
+          margin={args.margin}
+          styles={args.styles}
         />
       </div>
     );
@@ -92,6 +136,22 @@ export const Default: StoryObj = {
       vendas: "#5fb612",
       despesas: "#c3291e",
       lucro: "#1f46c8"
+    },
+    formatValue: {
+      "type": "number",
+    },
+    styles: {
+      strokeStyle: "",
+      strokeWidth: "2",
+      type: "monotone",
+      activeDot: { r: 8 },
+      legend: true
+    },
+    margin: {
+      top: 20,
+      right: 20,
+      left: 80,
+      bottom: 20,
     },
   },
 };
