@@ -16,25 +16,21 @@ import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 import { Collection, dataRow, Format } from '../types';
 
-type LineStyles = {
-  type: "monotone" | "linear" | "step";
-  strokeWidth: number;
-  activeDot?: { r: number };
-};
-
-type BarStyles = {
-  barSize: number;
-};
+type ChartType = 'line' | 'bar';
 
 type Styles = {
-  legend: boolean
-}
-
-type ChartStyles = Record<string, "line" | "bar" | LineStyles | BarStyles | Styles>;
+  [key: string]: ChartType;
+} & {
+  type?: 'monotone' | 'linear' | 'step';
+  legend?: boolean;
+  strokeWidth?: number;
+  activeDot?: { r: number };
+  barSize?: number;
+};
 
 interface ComposedChartProps {
   dataBody: dataRow[];
-  styles: ChartStyles;
+  styles: Styles;
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: Collection | null;
