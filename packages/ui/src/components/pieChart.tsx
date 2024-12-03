@@ -15,8 +15,9 @@ interface CustomizedLabelProps {
 }
 
 type Styles = {
-  legend: boolean
-  size: number
+  legend?: boolean
+  size?: number
+  legendType?: 'line' | 'square' | 'circle' | 'rect' | 'diamond' | 'star' | 'triangle' | 'wye'
 }
 
 type PieChartDashData = {
@@ -27,13 +28,26 @@ type PieChartDashData = {
 interface PieChartDashProps {
   data: PieChartDashData[];
   colorCollection?: string[] | Collection;
-  styles: Styles
-  formatValue: Format
+  styles?: Styles
+  formatValue?: Format
 }
 
-export function PieChartDash({ styles, data, colorCollection, formatValue }: PieChartDashProps) {
-  const calcToDefineOuterRadius = Math.round((styles.size / 700) * 200);
-  const calcToDefineFontSizeInText = Math.round((styles.size / 700) * 28);
+export function PieChartDash({
+  styles = {
+    legend: true,
+    legendType: 'square',
+  },
+  data,
+  colorCollection,
+  formatValue = {
+    type: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+  },
+}: PieChartDashProps) {
+  const { size = 500, legendType } = styles || {};
+  const calcToDefineOuterRadius = Math.round((size / 700) * 200);
+  const calcToDefineFontSizeInText = Math.round((size / 700) * 28);
 
   const RADIAN = Math.PI / 180;
 
@@ -49,7 +63,7 @@ export function PieChartDash({ styles, data, colorCollection, formatValue }: Pie
           cx="50%"
           cy="50%"
           labelLine={false}
-          legendType="square"
+          legendType={legendType}
           label={({
             cx,
             cy,
