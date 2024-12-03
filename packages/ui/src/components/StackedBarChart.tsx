@@ -85,7 +85,7 @@ export function StackedBarDash({
         margin={margin}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="label" />
         <YAxis type="number"
           tickFormatter={(value) => format(value as number, formatValue)}
         />
