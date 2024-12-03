@@ -94,8 +94,6 @@ export function StackedBarDash({
         />
         {styles.legend && <Legend />}
 
-        {console.log('xxx', referenceFields)}
-
         {referenceFields.map((item, index) => (
           <Bar
             key={index}
