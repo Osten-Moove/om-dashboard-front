@@ -15,25 +15,19 @@ export default {
       description: `
         OPÇÕES:
 
-        [
-          {
-            "type": "currency",
-            "currency": "BRL",
-            "minimumFractionDigits": 2
-          }
-        ]
+        {
+          "type": "currency",
+          "currency": "BRL",
+          "minimumFractionDigits": 2
+        }
 
-        [
-          {
-            "type": "number"
-          }
-        ]
+        {
+          "type": "number"
+        }
 
-        [
-          {
-            "type": "percentage"
-          }
-        ]
+        {
+          "type": "percentage"
+        }
       `,
     },
     styles: {
@@ -43,13 +37,16 @@ export default {
       description: `
         OPÇÕES:
 
-        {
-          type: "monotone" | "linear" | "step";
-          strokeWidth: number;
-          activeDot?: { r: number };
-          barSize: number;
-          legend: boolean;
-        };
+        Entrada: 'line',
+        Saída: 'line',
+        Resultado: 'bar',
+        config: {
+          type: 'linear',
+          legend: true,
+          strokeWidth: 3,
+          activeDot: { r: 8 },
+          barSize: 38
+        }
       `,
     },
     maxWidth: {
@@ -121,19 +118,19 @@ export const Default: StoryObj = {
       Entrada: 'line',
       Saída: 'line',
       Resultado: 'bar',
-      type: 'linear',
-      legend: true,
-      strokeWidth: 3,
-      activeDot: { r: 8 },
-      barSize: 38
+      config: {
+        type: 'linear',
+        legend: true,
+        strokeWidth: 3,
+        activeDot: { r: 8 },
+        barSize: 38
+      }
     },
-    formatValue: [
-      {
-        type: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2,
-      },
-    ],
+    formatValue: {
+      type: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    },
     maxWidth: 1920,
     colorCollection: {
       entrada: '#40c211',

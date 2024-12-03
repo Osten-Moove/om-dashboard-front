@@ -68,7 +68,7 @@ export default {
     },
     hoverColors: {
       control: {
-        type: "object", // Permite customizar as cores de hover
+        type: "object",
       },
     },
   },
@@ -76,33 +76,28 @@ export default {
     const data: any = [
       {
         label: "Janeiro",
-        Vendas: 4000,
-        Despesas: 2400,
-        Lucro: 1250,
+        Entrada: 4000,
+        Faturamento: 2400,
       },
       {
         label: "Fevereiro",
-        Vendas: 3000,
-        Despesas: 1398,
-        Lucro: 4250,
+        Entrada: 3000,
+        Faturamento: 1398,
       },
       {
         label: "Março",
-        Vendas: 2000,
-        Despesas: 9800,
-        Lucro: 2250,
+        Entrada: 2000,
+        Faturamento: 9800,
       },
       {
         label: "Abril",
-        Vendas: 2780,
-        Despesas: 3908,
-        Lucro: 3250,
+        Entrada: 2780,
+        Faturamento: 3908,
       },
       {
         label: "Maio",
-        Vendas: 1890,
-        Despesas: 4800,
-        Lucro: 1250,
+        Entrada: 1890,
+        Faturamento: 4800,
       },
     ];
     return (

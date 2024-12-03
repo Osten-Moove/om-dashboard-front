@@ -40,6 +40,7 @@ const meta: Meta<typeof PieChartDash> = {
         {
           legend: true
           size: number
+          legendType: 'line' | 'square' | 'circle' | 'rect' | 'diamond' | 'star' | 'triangle' | 'wye'
         }
       `,
     },
@@ -67,17 +68,17 @@ const meta: Meta<typeof PieChartDash> = {
 
 export default meta;
 
-export const Default: StoryObj<typeof PieChartDash> = {
+export const Default: StoryObj = {
   args: {
     colorCollection: ["#000", "#00ff00", "#0000ff", "#ffff00"],
-    styles: {
-      legend: true,
-      size: 500
-    },
     formatValue: {
       "type": "currency",
       "currency": "BRL",
       "minimumFractionDigits": 2
-    }
+    },
+    styles: {
+      legend: true,
+      legendType: 'square',
+    },
   },
 };

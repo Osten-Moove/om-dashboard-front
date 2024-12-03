@@ -16,11 +16,11 @@ import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 
 type Styles = {
-  strokeStyle: string
-  strokeWidth: string,
-  type: "monotone" | "linear" | "step";
-  activeDot?: Record<string, number> | { r: number };
-  legend: boolean;
+  strokeStyle?: string
+  strokeWidth?: string,
+  type?: "monotone" | "linear" | "step";
+  activeDot?: { r: number };
+  legend?: boolean;
 }
 
 interface LineChartDashProps {
@@ -28,9 +28,9 @@ interface LineChartDashProps {
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: Collection | null;
-  margin: Margin
-  styles: Styles,
-  formatValue: Format,
+  margin?: Margin
+  styles?: Styles,
+  formatValue?: Format,
 }
 
 export function LineChartDash({
@@ -39,8 +39,16 @@ export function LineChartDash({
   maxHeight = 800,
   colorCollection = null,
   margin,
-  styles,
-  formatValue,
+  styles = {
+    strokeStyle: '',
+    strokeWidth: '2',
+    type: 'monotone',
+    activeDot: { r: 8 },
+    legend: true
+  },
+  formatValue = {
+    type: 'number',
+  },
 }: LineChartDashProps) {
   const objectFields = dataBody && dataBody[0] ? Object.keys(dataBody[0]) : [];
 

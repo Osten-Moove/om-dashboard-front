@@ -11,26 +11,26 @@ import {
 
 import { useState } from "react";
 
+import { Margin } from 'recharts/types/util/types';
+import { format } from '../helpers/format';
 import { Colors } from "../styles/colors";
 import { Fonts } from "../styles/fonts";
 import { Collection, dataRow, Format } from '../types';
-import { format } from '../helpers/format';
-import { Margin } from 'recharts/types/util/types';
 
 type Styles = {
-  barSize: number
-  legend: boolean;
-  stackId: string
+  barSize?: number
+  legend?: boolean;
+  stackId?: string
 }
 interface StackedBarDashProps {
   dataBody: dataRow[];
   maxWidth?: number;
   maxHeight?: number;
   colorCollection?: Collection | null;
-  styles: Styles
-  margin: Margin
-  formatValue: Format,
-  hoverColors: Collection | null;
+  styles?: Styles
+  margin?: Margin
+  formatValue?: Format,
+  hoverColors?: Collection | null;
 }
 
 export function StackedBarDash({
@@ -38,9 +38,17 @@ export function StackedBarDash({
   maxWidth = 800,
   maxHeight = 600,
   colorCollection = null,
-  styles,
+  styles = {
+    legend: true,
+    barSize: 40,
+    stackId: 'a'
+  },
   margin,
-  formatValue,
+  formatValue = {
+    "type": "currency",
+    "currency": "BRL",
+    "minimumFractionDigits": 2
+  },
   hoverColors,
 }: StackedBarDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
@@ -55,9 +63,9 @@ export function StackedBarDash({
       : Object.values(colorCollection);
 
   const HOVER_COLORS =
-    hoverColors === null
-      ? COLORS.map((color) => `${color}CC`)
-      : Object.values(hoverColors);
+    hoverColors
+      ? Object.values(hoverColors)
+      : COLORS.map((color) => `${color}CC`);
 
   return (
     <ResponsiveContainer

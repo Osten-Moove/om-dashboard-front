@@ -18,9 +18,9 @@ import { Fonts } from "../styles/fonts";
 import { Collection, dataRow, Format } from '../types';
 
 type Styles = {
-  legend: boolean;
-  barSize: number,
-  radius: number
+  legend?: boolean;
+  barSize?: number,
+  radius?: number
 }
 interface BarChartDashProps {
   dataBody: dataRow[];
@@ -28,9 +28,9 @@ interface BarChartDashProps {
   maxHeight?: number;
   colorCollection?: Collection | null;
   hoverColors?: Collection | null;
-  margin: Margin
-  formatValue: Format
-  styles: Styles
+  margin?: Margin
+  formatValue?: Format
+  styles?: Styles
 }
 
 export function BarChartDash({
@@ -40,8 +40,16 @@ export function BarChartDash({
   colorCollection = null,
   hoverColors = null,
   margin,
-  formatValue,
-  styles,
+  formatValue = {
+    type: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+  },
+  styles = {
+    legend: true,
+    barSize: 40,
+    radius: 6
+  },
 }: BarChartDashProps) {
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
   const objectFields = dataBody && dataBody[0] ? Object.keys(dataBody[0]) : [];
@@ -86,7 +94,7 @@ export function BarChartDash({
         <Tooltip
           formatter={(value) => format(value as number, formatValue)}
         />
-        {styles.legend && <Legend />}
+        {styles!.legend && <Legend />}
 
         {referenceFields.map((item, index) => (
           <Bar

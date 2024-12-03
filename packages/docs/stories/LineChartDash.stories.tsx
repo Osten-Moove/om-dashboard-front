@@ -40,7 +40,7 @@ export default {
         {
           strokeStyle: "3 4 10 4",
           strokeWidth: "2",
-          type: "monotone"
+          type: "monotone" | "linear" | "step"
         }
       `,
     },
